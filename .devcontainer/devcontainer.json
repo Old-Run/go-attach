@@ -20,7 +20,6 @@
         "ms-azuretools.vscode-docker"
       ],
       "settings": {
-        // 預設 debugger 端口
         "go.delveConfig": {
           "listen": "0.0.0.0:2345",
           "apiVersion": 2
