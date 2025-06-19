@@ -1,0 +1,23 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Pi Attach (hello)",
+      "type": "go",
+      "request": "attach",
+      "debugAdapter": "dlv-dap",
+      "mode": "remote",
+      "host": "192.168.100.49",
+      "port": 2345,
+
+      "cwd": "${workspaceFolder}",
+      // DWARF 內留下來的 /src → 本機工作區
+      "substitutePath": [
+        { "from": "/src", "to": "${workspaceFolder}" }
+      ],
+
+      "showLog": true,
+      "logOutput": "debugger,dap"
+    }
+  ]
+}
