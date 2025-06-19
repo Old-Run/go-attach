@@ -4,12 +4,10 @@ FROM --platform=$BUILDPLATFORM golang:${GO_VERSION} AS builder
 
 WORKDIR /src
 COPY go.mod ./
-# 先下載相依 (可被 cache)
 RUN go mod download
 
 COPY . .
 
-# 讓 binary 保留符號，方便 dlv
 RUN --mount=type=cache,target=/root/.cache/go-build \
     go build -gcflags="all=-N -l" \
              -ldflags="-compressdwarf=false" \

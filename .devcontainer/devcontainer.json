@@ -1,28 +1,22 @@
 {
-  "name": "RUN Go 1.23 Dev Oven",
-  // 官方 dev containers 基底，內建非 root 使用者 vscode
+  "name": "RUN Go 1.23 Dev",
   "image": "mcr.microsoft.com/devcontainers/go:1.23-bookworm",
 
   "features": {
-    // 需要跑 docker buildx 時就留著
     "ghcr.io/devcontainers/features/docker-in-docker:2": {},
-    // 好用小工具 ls grep curl … 都包在這
     "ghcr.io/devcontainers/features/common-utils:2": {}
   },
 
-  // Go 默認會把 git commit hash寫進 binary；關掉可重現
   "containerEnv": {
     "GOFLAGS": "-buildvcs=false"
   },
 
-  // 進 container 後一次裝好 dlv ＋ go toolchain 更新
   "postCreateCommand": "go install github.com/go-delve/delve/cmd/dlv@latest",
 
-  // VS Code 進 container 會自動裝這些 extension
   "customizations": {
     "vscode": {
       "extensions": [
-        "golang.go",           // 必裝，Go 語言支援
+        "golang.go",
         "ms-azuretools.vscode-docker"
       ],
       "settings": {
@@ -35,11 +29,9 @@
     }
   },
 
-  // 把本機目錄綁進 /workspace，跟老設定一樣
   "mounts": [
     "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached"
   ],
 
-  // 使用 vscode 使用者可避免檔案權限  root:root
   "remoteUser": "vscode"
 }
